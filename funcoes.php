@@ -3,9 +3,14 @@
 //Conecta com o MySQL usando PDO
 function db_connect()
 {
-    $PDO = new PDO('mysql:host=' . DB_HOST . ';port=3306;dbname=' . DB_NAME . ';charset=utf8', DB_USER, DB_PASS);
-
-    return $PDO;
+    try {
+	    $conexao = new PDO("mysql:host=localhost;port=3306;dbname=login", "root", "");
+	    $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	    $conexao->exec("set names utf8");
+	    return $conexao;
+	} catch (PDOException $erro) {
+	    echo "Erro na conexão:".$erro->getMessage();
+	}
 }
  
 //Cria o hash da senha, usando MD5 e SHA-1

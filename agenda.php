@@ -19,14 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = (isset($_GET["id"]) && $_GET["id"] != null) ? $_GET["id"] : "";
 }
 
-// Cria a conexão com o banco de dados
-try {
-    $conexao = new PDO("mysql:host=localhost;port=3306;dbname=login", "root", "");
-    $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $conexao->exec("set names utf8");
-} catch (PDOException $erro) {
-    echo "Erro na conexão:".$erro->getMessage();
-}
+// busca a instancia do banco de dados
+$conexao = db_connect();
 
 // Bloco If que Salva os dados no Banco - atua como Create e Update
 if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "save" && $nome != "") {
