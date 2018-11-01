@@ -30,4 +30,19 @@ function isLoggedIn()
     return true;
 }
 
+function showError($message){
+	require_once './assets/header.php';
+    echo "
+    	<h1 class='text-center mt-4'>
+    		{$message}
+    		<br>
+    		<a href='javascript:history.back()''>
+    			Voltar
+			</a>
+		</h1>
+	";
+	require_once './assets/footer.php';
+    exit;
+}
+
 ?>

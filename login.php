@@ -1,24 +1,13 @@
 <?php
  
 // inclui o arquivo de inicialização
-require 'conexao.php';
+require_once 'conexao.php';
+require_once 'funcoes.php';
  
 // resgata variáveis do formulário
-$email = isset($_POST['email']) ? $_POST['email'] : '';
-$password = isset($_POST['password']) ? $_POST['password'] : '';
- 
-if (empty($email) || empty($password))
-{
-	require_once './assets/header.php';
-    echo "
-    	<h1 class='text-center'>Informe email e senha.
-    	<br>
-    	<a href='javascript:history.back()''>Voltar</a> </h1>
-	";
-	require_once './assets/footer.php';
-    exit;
-}
- 
+$email = isset($_POST['email']) && !empty($_POST['email']) ? $_POST['email'] : showError('Informe o email.');;
+$password = isset($_POST['password']) && !empty($_POST['password']) ? $_POST['password'] : showError('Informe a senha.');;
+
 // cria o hash da senha
 $passwordHash = make_hash($password);
  
@@ -34,17 +23,7 @@ $stmt->execute();
  
 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
  
-if (count($users) <= 0)
-{
-	require_once './assets/header.php';
-    echo "
-    	<h1 class='text-center'>Usuário ou senha incorretos.
-    	<br>
-    	<a href='javascript:history.back()''>Voltar</a> </h1>
-	";
-	require_once './assets/footer.php';
-    exit;
-}
+if (count($users) <= 0) showError('Usuário ou senha incorretos.');
  
 // pega o primeiro usuário
 $user = $users[0];
