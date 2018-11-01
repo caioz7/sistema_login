@@ -1,2 +1,5 @@
-# sistema_login
-Sistema de login em php
+# SISTEMA DE LOGIN
+
+Programa desenvolvido em PHP
+
+Possui funçoes para tratamentos de erros!
