@@ -1,18 +1,13 @@
 <?php
  
 // inclui o arquivo de inicialização
-require 'conexao.php';
+require_once 'conexao.php';
+require_once 'funcoes.php';
  
 // resgata variáveis do formulário
-$email = isset($_POST['email']) ? $_POST['email'] : '';
-$password = isset($_POST['password']) ? $_POST['password'] : '';
- 
-if (empty($email) || empty($password))
-{
-    echo "Informe email e senha";
-    exit;
-}
- 
+$email = isset($_POST['email']) && !empty($_POST['email']) ? $_POST['email'] : showError('Informe o email.');;
+$password = isset($_POST['password']) && !empty($_POST['password']) ? $_POST['password'] : showError('Informe a senha.');;
+
 // cria o hash da senha
 $passwordHash = make_hash($password);
  
@@ -28,11 +23,7 @@ $stmt->execute();
  
 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
  
-if (count($users) <= 0)
-{
-    echo "Email ou senha incorretos";
-    exit;
-}
+if (count($users) <= 0) showError('Usuário ou senha incorretos.');
  
 // pega o primeiro usuário
 $user = $users[0];

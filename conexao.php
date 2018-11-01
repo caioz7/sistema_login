@@ -1,9 +1,9 @@
 <?php
- 
 // constantes com as credenciais de acesso ao banco MySQL
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
+define('DB_PORT', '3306');
 define('DB_NAME', 'login');
  
 // habilita todas as exibições de erros

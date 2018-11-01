@@ -1,31 +1,25 @@
 <?php
-session_start();
- 
-require 'conexao.php';
+    session_start();
+    require_once 'conexao.php';
+    require_once './assets/header.php';
+
 ?>
-<!doctype html>
-<html>
-    <head>
-        <meta charset="utf-8">
+    <h1 class="text-center bg-primary mb-0 text-white p-2">Sistema de Login PHP</h1>   
  
-        <title>Sistema de Login PHP</title>
-    </head>
- 
-    <body>
-         
-        <h1>Sistema de Login PHP</h1>
- 
-        <?php if (isLoggedIn()):
-        
-            header("Location: home.php");
+<?php 
+    if (isLoggedIn()){
+        header("Location: home.php");
+    }
+    else{
+?>
+    <h5 class="text-center p-3">
+        Olá, visitante. 
+        <br>
+        <a href="form-login.php" class="">Clique para Logar</a></p>    
+    </h5>
+    
 
-        else: 
-
-            echo "Olá, visitante. <a href=form-login.php>Login</a></p>";
-            
-        endif; 
-        
-        ?>
- 
-    </body>
-</html>
+<?php
+    }
+    require_once './assets/footer.php';
+?>

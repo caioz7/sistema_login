@@ -2,8 +2,9 @@
 session_start();
  
 require_once 'conexao.php';
-
-require 'verifica_sessao.php';
+require_once 'verifica_sessao.php';
+require_once './assets/header.php';
+require_once './assets/menu.php';
 
 error_reporting(0);
 
@@ -88,52 +89,38 @@ if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "del" && $id != "") {
     }
 }
 ?>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Agenda de contatos</title>
-    </head>
-    <body>
-        <p>Seja bem vindo, <?php echo $_SESSION['user_name']; ?>.</p>
-        <form action="?act=save" method="POST" name="form1" >
-            <h1>Agenda de contatos</h1>
-            <hr>
-            <input type="hidden" name="id" <?php
-            
-            // Preenche o id no campo id com um valor "value"
-            if (isset($id) && $id != null || $id != "") {
-                echo "value=\"{$id}\"";
-            }
-            ?> />
-            Nome:
-           <input type="text" name="nome" <?php
+  <form action="?act=save" method="POST" name="form1" >
+      <h1>Agenda de contatos</h1>
+      <hr>
+      <input type="hidden" name="id" <?php
+      
+      // Preenche o id no campo id com um valor "value"
+      if (isset($id) && $id != null || $id != "") {
+          echo "value=\"{$id}\"";
+      }
+      ?> />
+      Nome:
+     <input type="text" name="nome" <?php
 
-           // Preenche o nome no campo nome com um valor "value"
-           if (isset($nome) && $nome != null || $nome != "") {
-               echo "value=\"{$nome}\"";
-           }
-           ?> />
-           E-mail:
-           <input type="text" name="email" <?php
+     // Preenche o nome no campo nome com um valor "value"
+     if (isset($nome) && $nome != null || $nome != "") {
+         echo "value=\"{$nome}\"";
+     }
+     ?> />
+     E-mail:
+     <input type="text" name="email" <?php
 
-           // Preenche o email no campo email com um valor "value"
-           if (isset($email) && $email != null || $email != "") {
-               echo "value=\"{$email}\"";
-           }
-           ?> />
-           Celular:
-           <input type="text" name="celular" <?php
-
-           // Preenche o celular no campo celular com um valor "value"
-           if (isset($celular) && $celular != null || $celular != "") {
-               echo "value=\"{$celular}\"";
-           }
-           ?> />
-           <input type="submit" value="salvar" />
-           <input type="reset" value="Novo" />
-           <hr>
-        </form>
+     // Preenche o email no campo email com um valor "value"
+     if (isset($email) && $email != null || $email != "") {
+         echo "value=\"{$email}\"";
+     }
+     ?> />
+     Celular:
+     <input type="text" name="celular" <?php echo isset($celular) && !empty($celular) ? "value='{$celular}'" : '';?> />
+     <input type="submit" value="salvar" />
+     <input type="reset" value="Novo" />
+     <hr>
+  </form>
         <table border="1" width="100%">
             <tr>
                 <th>Nome</th>
@@ -163,7 +150,4 @@ if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "del" && $id != "") {
             }
             ?>
         </table>
-
-        <br /><br /><br /><a href="logout.php">Sair</a></p>        
-    </body>
-</html>
+<?php require_once './assets/footer.php'; ?>
