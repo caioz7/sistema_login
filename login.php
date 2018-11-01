@@ -9,7 +9,13 @@ $password = isset($_POST['password']) ? $_POST['password'] : '';
  
 if (empty($email) || empty($password))
 {
-    echo "Informe email e senha";
+	require_once './assets/header.php';
+    echo "
+    	<h1 class='text-center'>Informe email e senha.
+    	<br>
+    	<a href='javascript:history.back()''>Voltar</a> </h1>
+	";
+	require_once './assets/footer.php';
     exit;
 }
  
@@ -30,7 +36,13 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
  
 if (count($users) <= 0)
 {
-    echo "Email ou senha incorretos";
+	require_once './assets/header.php';
+    echo "
+    	<h1 class='text-center'>Usuário ou senha incorretos.
+    	<br>
+    	<a href='javascript:history.back()''>Voltar</a> </h1>
+	";
+	require_once './assets/footer.php';
     exit;
 }
  
